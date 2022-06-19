@@ -64,21 +64,21 @@ const BottomBar = styled.div`
 
 export const TextBox = ({text, secondary, delay}) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, durationInFrames } = useVideoConfig();
 
-  const stickerSpring = spring({
-    frame: frame - delay,
-    fps: fps,
-    config: {
-      mass: 1,
-      damping: 15,
-      stiffness: 99,
-    }
-  })
+  // const stickerSpring = spring({
+  //   frame: frame - delay,
+  //   fps: fps,
+  //   config: {
+  //     mass: 1,
+  //     damping: 15,
+  //     stiffness: 99,
+  //   }
+  // })
 
   const stickerOpacity = interpolate(frame - delay, [0, 20], [0, 1])
 
-  const stickerSlide = interpolate(stickerSpring, [0, 1], [-300, 0])
+  // const stickerSlide = interpolate(stickerSpring, [0, 1], [-300, 0])
 
   return (
     <Sticker secondary={secondary} style={{ opacity: stickerOpacity }}>
