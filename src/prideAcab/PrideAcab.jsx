@@ -9,8 +9,8 @@ export const PrideAcab = () => {
     <StyledFill bgcolor="black">
       <AngledFlag />
       <VerticalFlag />
-      <TextBox text="NOT GAY AS IN HAPPY ..." />
-      <TextBox text="QUEER AS IN F%$! THE POLICE" secondary />
+      <TextBox text="NOT GAY AS IN HAPPY" delay={100} />
+      <TextBox text="QUEER AS IN F%$! THE POLICE" secondary delay={115} />
     </StyledFill>
   )
 }

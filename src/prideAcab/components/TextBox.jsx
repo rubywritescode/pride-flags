@@ -1,22 +1,5 @@
+import { useCurrentFrame, useVideoConfig, interpolate, spring } from "remotion";
 import styled from "styled-components";
-
-const Title = styled.h1`
-  margin: 0;
-  padding: 0;
-  color: white;
-  position: absolute;
-  z-index: 2;
-  background: lightgrey;
-  padding: 5px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 175px;
-  text-align: center;
-  width: calc(100% - 160px);
-  border-radius: 16px;
-  box-shadow: 5px 5px 15px 3px rgba(0,0,0,0.5);
-`
 
 const STICKER_RED = "#db1f33"
 const STICKER_BLUE = "#295095"
@@ -32,10 +15,10 @@ const Sticker = styled.div`
   box-shadow: 5px 5px 15px 3px rgba(0,0,0,0.5);
   display: flex;
   flex-direction: column;
-  transform: scale(1.3) ${props => props.secondary ? 'rotate(1deg)' : 'rotate(-3deg)'};
+  transform: scale(1.3) ${props => props.secondary ? 'rotate(4deg)' : 'rotate(-3deg)'};
 
-  top: ${props => props.secondary ? '840px' : '200px'};
-  left: ${props => props.secondary ? '300px' : '60px'};
+  top: ${props => props.secondary ? '800px' : '200px'};
+  left: ${props => props.secondary ? '230px' : '130px'};
 `
 
 const TopBar = styled.div`
@@ -61,12 +44,15 @@ const TopBar = styled.div`
 
 const MiddleBar = styled.div`
   flex: 1;
-  padding-left: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   h3 {
     margin: 0;
     padding: 0;
     font-size: 75px;
+    text-align: center;
   }
 `
 
@@ -76,9 +62,26 @@ const BottomBar = styled.div`
   border-radius: 0 0 16px 16px;
 `
 
-export const TextBox = ({text, secondary}) => {
+export const TextBox = ({text, secondary, delay}) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const stickerSpring = spring({
+    frame: frame - delay,
+    fps: fps,
+    config: {
+      mass: 1,
+      damping: 15,
+      stiffness: 99,
+    }
+  })
+
+  const stickerOpacity = interpolate(frame - delay, [0, 20], [0, 1])
+
+  const stickerSlide = interpolate(stickerSpring, [0, 1], [-300, 0])
+
   return (
-    <Sticker secondary={secondary}>
+    <Sticker secondary={secondary} style={{ opacity: stickerOpacity }}>
       <TopBar secondary={secondary}>
         <h1>HELLO</h1>
         <h2>MY NAME IS</h2>
