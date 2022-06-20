@@ -66,22 +66,34 @@ export const TextBox = ({text, secondary, delay}) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
 
-  // const stickerSpring = spring({
-  //   frame: frame - delay,
-  //   fps: fps,
-  //   config: {
-  //     mass: 1,
-  //     damping: 15,
-  //     stiffness: 99,
-  //   }
-  // })
-
+  // fades in the stickers based on the delay prop
   const stickerOpacity = interpolate(frame - delay, [0, 20], [0, 1])
+  
+  // sets sticker spring to start at frame 200
+  const stickerSpring = spring({
+    frame: frame - 200,
+    fps: fps,
+    config: {
+      mass: 1,
+      damping: 15,
+      stiffness: 99,
+    }
+  })
 
-  // const stickerSlide = interpolate(stickerSpring, [0, 1], [-300, 0])
+  // sets where stickers should move based on the secondary prop
+  const stickerMovement = secondary ? -1000 : 1000;
+  // variable for the additional transform values needed for this design
+  // ensures the look of the component doesn't change once the animation starts changing the transform values
+  const stickerTransform = secondary ? "scale(1.3) rotate(4deg)" : "scale(1.3) rotate(-3deg)"
+
+  // the starts the sticker slide at the curren position (0) then animates to the position in stickerMovement
+  const stickerSlide = interpolate(stickerSpring, [0, 1], [0, stickerMovement])
 
   return (
-    <Sticker secondary={secondary} style={{ opacity: stickerOpacity }}>
+    <Sticker secondary={secondary} style={{ 
+      opacity: stickerOpacity, 
+      transform: `${stickerTransform} translateX(${stickerSlide}px)` 
+    }}>
       <TopBar secondary={secondary}>
         <h1>HELLO</h1>
         <h2>MY NAME IS</h2>
