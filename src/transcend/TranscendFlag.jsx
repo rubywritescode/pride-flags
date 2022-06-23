@@ -36,7 +36,7 @@ export const TranscendFlag = ({keyword}) => {
             )
           })}
         </AbsoluteFill>
-        <Signature style={{top: '120px'}} />
+        <Signature top="120px" />
       </StyledFill>
     </>
   )
