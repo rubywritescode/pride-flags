@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Permanent+Marker&display=swap');
 
 * {
   font-family: Arial, Helvetica, sans-serif;
@@ -6,4 +6,8 @@
 
 .marker {
   font-family: 'Permanent Marker', cursive;
+}
+
+.monoton {
+  font-family: 'Monoton', cursive;
 }

@@ -5,6 +5,7 @@ import { AngledFlag } from "./components/AngledFlag"
 import { StyledFill } from "../generics/StyledFill"
 import { TextBox } from "./components/TextBox"
 import { Signature } from "./components/Signature"
+import { flagColors } from "./constants"
 
 export const PrideAcab = () => {
   const frame = useCurrentFrame();
@@ -16,7 +17,7 @@ export const PrideAcab = () => {
     <StyledFill bgcolor="black" style={{zIndex: -2}}>
       <AbsoluteFill style={{opacity: fadeOut}}>
         <AngledFlag />
-        <VerticalFlag />
+        <VerticalFlag colorArray={flagColors} />
         <TextBox text="NOT GAY AS IN HAPPY" delay={100} />
         <TextBox text="QUEER AS IN F%$! THE POLICE" secondary delay={115} />
       </AbsoluteFill>
