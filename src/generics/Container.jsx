@@ -8,9 +8,9 @@ const Wrapper = styled.div`
   align-items: ${props => props.alignItems || 'stretch'};
 `
 
-export const Container = ({children}) => {
+export const Container = ({children, flexDirection, justifyContent, alignItems}) => {
   return (
-    <Wrapper className="wrapper">
+    <Wrapper className="wrapper" flexDirection={flexDirection} justifyContent={justifyContent} alignItems={alignItems}>
       {children}
     </Wrapper>
   )
